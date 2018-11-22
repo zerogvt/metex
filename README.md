@@ -1,4 +1,5 @@
 # Metex
+Example elixir application off https://www.manning.com/books/the-little-elixir-and-otp-guidebook
 
 **TODO: Add description**
 
@@ -18,4 +19,3 @@ end
 Documentation can be generated with [ExDoc](https://github.com/elixir-lang/ex_doc)
 and published on [HexDocs](https://hexdocs.pm). Once published, the docs can
 be found at [https://hexdocs.pm/metex](https://hexdocs.pm/metex).
-
