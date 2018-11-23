@@ -14,6 +14,9 @@ defmodule Metex.Worker do
   def get_stats(pid) do
     GenServer.call(pid, :stats)
   end
+  def stop(pid) do
+    GenServer.cast(pid, :stop)
+  end
 
   ## Server Callbacks
   def init(:ok) do
@@ -32,6 +35,21 @@ defmodule Metex.Worker do
 
   def handle_call(:stats, _from, stats) do
     {:reply, stats, stats}
+  end
+
+  def handle_cast(:stop, stats) do
+    {:stop, :normal, stats}
+  end
+
+  def handle_info(msg, stats) do
+    IO.puts "Received out of band message: #{inspect msg}"
+    {:noreply, stats}
+  end
+
+  def terminate(reason, stats) do
+    IO.puts "server terminated because of #{inspect reason}"
+    IO.puts "stats: #{inspect stats}"
+    :ok
   end
   ## Helper Functions
   defp temperature_of(location) do
