@@ -11,6 +11,9 @@ defmodule Metex.Worker do
   def get_temperature(pid, location) do
     GenServer.call(pid, {:location, location})
   end
+  def get_stats(pid) do
+    GenServer.call(pid, :stats)
+  end
 
   ## Server Callbacks
   def init(:ok) do
@@ -27,6 +30,9 @@ defmodule Metex.Worker do
     end
   end
 
+  def handle_call(:stats, _from, stats) do
+    {:reply, stats, stats}
+  end
   ## Helper Functions
   defp temperature_of(location) do
     url_for(location) |> HTTPoison.get |> parse_response
